@@ -14,7 +14,7 @@ import logging
 
 import timm
 import torch
-from timm.models.helpers import build_model_with_cfg
+from timm.models import build_model_with_cfg
 from timm.models.vision_transformer import checkpoint_filter_fn
 
 _logger = logging.getLogger(__name__)
