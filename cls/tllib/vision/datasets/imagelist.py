@@ -143,4 +143,4 @@ class MultipleDomainsDataset(Dataset[T_co]):
     def cummulative_sizes(self):
         warnings.warn("cummulative_sizes attribute is renamed to "
                       "cumulative_sizes", DeprecationWarning, stacklevel=2)
-        return self.cumulative_sizes(.venv)
+        return self.cumulative_sizes
