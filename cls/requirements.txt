@@ -1,8 +1,10 @@
-wandb>=0.16.0
-timm==0.5.4
-prettytable==2.2.0
-protobuf==3.20.*
-wilds==2.0.0
-einops==0.4.1
-kornia==0.5.8
-matplotlib
+torch==2.9.1
+torchvision==0.24.1
+wandb==0.23.1
+timm==1.0.22
+prettytable==3.16.0
+protobuf==5.29.2      # v6.x is available but v5.29 is more stable for these ML libraries
+wilds==2.0.0          # Still the latest release for this benchmark
+einops==0.8.1
+kornia==0.8.2
+matplotlib==3.10.8
