@@ -1,7 +1,7 @@
 from collections import OrderedDict
 
 import torch
-from timm.models.layers import DropPath
+from timm.layers import DropPath
 from torch import nn
 from torch.nn.modules.dropout import _DropoutNd
 

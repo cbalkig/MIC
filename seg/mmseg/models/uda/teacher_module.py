@@ -7,7 +7,7 @@ from copy import deepcopy
 
 import numpy as np
 import torch
-from timm.models.layers import DropPath
+from timm.layers import DropPath
 from torch.nn import Module
 from torch.nn.modules.dropout import _DropoutNd
 

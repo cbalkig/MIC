@@ -13,7 +13,7 @@ from functools import partial
 import torch
 import torch.nn as nn
 from mmcv.runner import BaseModule, _load_checkpoint
-from timm.models.layers import DropPath, to_2tuple, trunc_normal_
+from timm.layers import DropPath, to_2tuple, trunc_normal_
 
 from mmseg.models.builder import BACKBONES
 from mmseg.utils import get_root_logger
