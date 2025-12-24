@@ -220,8 +220,8 @@ def train(train_source_iter: ForeverDataIterator, train_target_iter: ForeverData
 
     end = time.time()
     for i in range(args.iters_per_epoch):
-        x_s, labels_s = next(train_source_iter)
-        x_t, = next(train_target_iter)
+        x_s, labels_s, _ = next(train_source_iter)
+        x_t, _, _ = next(train_target_iter)
 
         x_s = x_s.to(device)
         x_t = x_t.to(device)
