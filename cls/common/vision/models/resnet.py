@@ -3,7 +3,7 @@ import torch.nn as nn
 from torchvision import models
 from torch.hub import load_state_dict_from_url
 #from torch.hub import load_state_dict_from_url
-from torchvision.models.resnet import BasicBlock, Bottleneck, model_urls
+from torchvision.models.resnet import BasicBlock, Bottleneck
 import copy
 
 __all__ = ['ResNet', 'resnet18', 'resnet34', 'resnet50', 'resnet101',
