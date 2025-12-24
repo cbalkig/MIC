@@ -107,7 +107,7 @@ def get_dataset(dataset_name, root, source, target, train_source_transform, val_
         print(f'Number of val samples: {len(val_dataset)}')
         print(f'Number of test samples: {len(test_dataset)}')
 
-    if dataset_name == "Digits":
+    elif dataset_name == "Digits":
         train_source_dataset = datasets.__dict__[source[0]](osp.join(root, source[0]), download=True,
                                                             transform=train_source_transform)
         train_target_dataset = datasets.__dict__[target[0]](osp.join(root, target[0]), download=True,
