@@ -90,7 +90,7 @@ except Exception as e:
 echo "Starting Training: ./.venv/bin/python $PY_SCRIPT_PATH $X_ARGS"
 echo "Check main log at: $LOG_FILE"
 
-nohup ./.venv/bin/python "$PY_SCRIPT_PATH" \
+nohup ../.venv/bin/python "$PY_SCRIPT_PATH" \
     $X_ARGS >> "$LOG_FILE" 2>&1 &
 
 PY_PID=$!
