@@ -83,7 +83,9 @@ def get_dataset_names():
 
 
 def get_dataset(dataset_name, root, source, target, train_source_transform, val_transform, train_target_transform=None):
-    def concat_dataset(tasks, start_idx, **kwargs):
+    dataset = datasets.__dict__[dataset_name]
+
+    def concat_dataset(tasks, **kwargs):
         return ConcatDataset([dataset(task=task, **kwargs) for task in tasks])
 
     if train_target_transform is None:
