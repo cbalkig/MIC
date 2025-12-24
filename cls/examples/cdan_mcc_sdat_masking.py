@@ -33,6 +33,9 @@ from common.utils.sam import SAM
 sys.path.append('.')
 import utils
 
+import warnings
+# Silence the "pkg_resources" warning
+warnings.filterwarnings("ignore", category=UserWarning, module="outdated")
 
 def main(args: argparse.Namespace):
     logger = CompleteLogger(args.log, args.phase)
@@ -217,8 +220,8 @@ def train(train_source_iter: ForeverDataIterator, train_target_iter: ForeverData
 
     end = time.time()
     for i in range(args.iters_per_epoch):
-        x_s, labels_s = next(train_source_iter)[:1]
-        x_t, = next(train_target_iter)[:1]
+        x_s, labels_s = next(train_source_iter)
+        x_t, = next(train_target_iter)
 
         x_s = x_s.to(device)
         x_t = x_t.to(device)
