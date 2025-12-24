@@ -16,6 +16,8 @@ import wilds
 
 from dalib.modules.mae import create_mae
 
+from cls.tllib.vision.datasets.imagelist import MultipleDomainsDataset
+
 sys.path.append('../')
 import common.vision.datasets as datasets
 import common.vision.models as models
@@ -83,19 +85,19 @@ def get_dataset_names():
 
 
 def get_dataset(dataset_name, root, source, target, train_source_transform, val_transform, train_target_transform=None):
-    dataset = datasets.__dict__[dataset_name]
-
-    def concat_dataset(tasks, **kwargs):
-        return ConcatDataset([dataset(task=task, **kwargs) for task in tasks])
+    def concat_dataset(tasks, start_idx, **kwargs):
+        # return ConcatDataset([dataset(task=task, **kwargs) for task in tasks])
+        return MultipleDomainsDataset([datasets.__dict__[dataset_name](task=task, **kwargs) for task in tasks], tasks,
+                                      domain_ids=list(range(start_idx, start_idx + len(tasks))))
 
     if train_target_transform is None:
         train_target_transform = train_source_transform
 
     if dataset_name  == "NeuroDomain":
-        train_source_dataset = concat_dataset(root=root, tasks=source, split='train', download=True, transform=train_source_transform)
-        train_target_dataset = concat_dataset(root=root, tasks=target, split='train', download=True, transform=train_target_transform)
-        val_dataset = concat_dataset(root=root, tasks=target, split='val', download=True, transform=val_transform)
-        test_dataset = concat_dataset(root=root, tasks=target, split='test', download=True, transform=val_transform)
+        train_source_dataset = concat_dataset(root=root, tasks=source, split='train', download=True, transform=train_source_transform, start_idx=0)
+        train_target_dataset = concat_dataset(root=root, tasks=target, split='train', download=True, transform=train_target_transform, start_idx=0)
+        val_dataset = concat_dataset(root=root, tasks=target, split='val', download=True, transform=val_transform, start_idx=0)
+        test_dataset = concat_dataset(root=root, tasks=target, split='test', download=True, transform=val_transform, start_idx=0)
         class_names = train_source_dataset.datasets[0].classes
         num_classes = len(class_names)
 
