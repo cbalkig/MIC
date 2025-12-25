@@ -9,3 +9,4 @@ einops==0.8.1
 kornia==0.8.2
 matplotlib==3.10.8
 outdated==0.2.2
+setuptools<81

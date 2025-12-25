@@ -1,4 +1,8 @@
 # Credits: https://github.com/thuml/Transfer-Learning-Library
+import warnings
+# Silence the "pkg_resources" warning
+warnings.filterwarnings("ignore", category=UserWarning, module="outdated")
+
 import random
 import time
 import warnings
@@ -33,9 +37,7 @@ from common.utils.sam import SAM
 sys.path.append('.')
 import utils
 
-import warnings
-# Silence the "pkg_resources" warning
-warnings.filterwarnings("ignore", category=UserWarning, module="outdated")
+
 
 def main(args: argparse.Namespace):
     logger = CompleteLogger(args.log, args.phase)
