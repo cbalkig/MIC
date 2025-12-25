@@ -161,7 +161,7 @@ def validate(val_loader, model, args, device) -> float:
 
     with torch.no_grad():
         end = time.time()
-        for i, (images, target) in enumerate(val_loader):
+        for i, (images, target, _) in enumerate(val_loader):
             images = images.to(device)
             target = target.to(device)
 
