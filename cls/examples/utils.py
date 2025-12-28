@@ -13,7 +13,7 @@ from timm.models import register_model
 from torch.utils.data import ConcatDataset
 import wandb
 import wilds
-
+from sklearn.metrics import f1_score
 from dalib.modules.mae import create_mae
 
 from cls.tllib.vision.datasets.imagelist import MultipleDomainsDataset
@@ -159,6 +159,9 @@ def validate(val_loader, model, args, device) -> float:
     else:
         confmat = None
 
+    all_preds = []
+    all_targets = []
+
     with torch.no_grad():
         end = time.time()
         for i, (images, target, _) in enumerate(val_loader):
@@ -168,6 +171,10 @@ def validate(val_loader, model, args, device) -> float:
             # compute output
             output = model(images)
             loss = F.cross_entropy(output, target)
+
+            _, pred = torch.max(output, 1)
+            all_preds.extend(pred.cpu().numpy())
+            all_targets.extend(target.cpu().numpy())
 
             # measure accuracy and record loss
             acc1, = accuracy(output, target, topk=(1,))
@@ -184,6 +191,11 @@ def validate(val_loader, model, args, device) -> float:
                 progress.display(i)
 
         print(' * Acc@1 {top1.avg:.3f}'.format(top1=top1))
+        if confmat:
+            print(confmat.format(args.class_names))
+
+        f1 = f1_score(all_targets, all_preds, average='macro')
+        print(f' * Acc@1 {top1.avg:.3f} F1 Score {f1 * 100:.2f}')
         if confmat:
             print(confmat.format(args.class_names))
 
